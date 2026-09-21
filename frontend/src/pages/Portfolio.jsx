@@ -43,7 +43,6 @@ function Portfolio() {
   const summary = portfolio?.summary;
   const holdings = portfolio?.holdings || [];
 
-  // Prepare chart data
   const allocationData = holdings.map((stock) => ({
     name: stock.symbol,
     value: stock.currentValue,
@@ -53,6 +52,9 @@ function Portfolio() {
     { name: "Invested", value: summary?.totalInvested || 0 },
     { name: "Current", value: summary?.totalCurrentValue || 0 },
   ];
+
+  // Use subtle tones for a consistent premium palette
+  const allocationColors = ["#64748b", "#94a3b8", "#475569", "#22c55e"];
 
   const formatCurrency = (value) =>
     `₹${Number(value || 0).toLocaleString("en-IN", {
@@ -66,23 +68,27 @@ function Portfolio() {
 
       <main className="portfolio-container">
         <section className="portfolio-header">
-          <p className="dashboard-label">PORTFOLIO</p>
-          <h2>Your Investments</h2>
-          <p>Track your holdings and portfolio performance.</p>
+          <div>
+            <p className="dashboard-label">PORTFOLIO</p>
+            <h2>Your Investments</h2>
+            <p>Track your holdings and portfolio performance.</p>
+          </div>
         </section>
 
         <section className="portfolio-summary">
           <div className="portfolio-card">
             <span>Invested Value</span>
             <strong>{formatCurrency(summary?.totalInvested)}</strong>
+            <small>Capital deployed</small>
           </div>
 
           <div className="portfolio-card">
             <span>Current Value</span>
             <strong>{formatCurrency(summary?.totalCurrentValue)}</strong>
+            <small>Market valuation</small>
           </div>
 
-          <div className="portfolio-card profit-card">
+          <div className="portfolio-card portfolio-profit">
             <span>Total P/L</span>
             <strong>
               {summary?.totalProfitLoss >= 0 ? "+" : "-"}
@@ -98,37 +104,51 @@ function Portfolio() {
         {holdings.length > 0 && (
           <section className="analytics-grid">
             <div className="analytics-card">
-              <div className="analytics-heading">
-                <p className="dashboard-label">PERFORMANCE</p>
-                <h3>Invested vs Current</h3>
+              <div className="analytics-top">
+                <div>
+                  <p className="analytics-label">PERFORMANCE</p>
+                  <h3>Portfolio Value</h3>
+                </div>
+                <span className="analytics-meta">INR</span>
               </div>
 
               <div className="analytics-chart">
                 <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={performanceData}>
+                  <BarChart
+                    data={performanceData}
+                    margin={{ top: 10, right: 8, left: -20, bottom: 0 }}
+                  >
                     <CartesianGrid
+                      stroke="#172235"
                       strokeDasharray="3 3"
-                      stroke="#1e293b"
+                      vertical={false}
                     />
                     <XAxis
                       dataKey="name"
-                      tick={{ fill: "#94a3b8", fontSize: 11 }}
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{ fill: "#64748b", fontSize: 10 }}
                     />
                     <YAxis
-                      tick={{ fill: "#94a3b8", fontSize: 11 }}
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{ fill: "#64748b", fontSize: 9 }}
                     />
                     <Tooltip
+                      cursor={{ fill: "#111a2a" }}
                       formatter={(value) => formatCurrency(value)}
                       contentStyle={{
-                        background: "#111827",
-                        border: "1px solid #334155",
+                        background: "#101827",
+                        border: "1px solid #26354b",
                         borderRadius: "8px",
+                        color: "#f8fafc",
                       }}
                     />
                     <Bar
                       dataKey="value"
-                      fill="#22c55e"
-                      radius={[5, 5, 0, 0]}
+                      fill="#94a3b8"
+                      radius={[4, 4, 0, 0]}
+                      barSize={42}
                     />
                   </BarChart>
                 </ResponsiveContainer>
@@ -136,51 +156,76 @@ function Portfolio() {
             </div>
 
             <div className="analytics-card">
-              <div className="analytics-heading">
-                <p className="dashboard-label">ALLOCATION</p>
-                <h3>Portfolio Distribution</h3>
+              <div className="analytics-top">
+                <div>
+                  <p className="analytics-label">ALLOCATION</p>
+                  <h3>Portfolio Mix</h3>
+                </div>
+                <span className="analytics-meta">
+                  {holdings.length} STOCK{holdings.length > 1 ? "S" : ""}
+                </span>
               </div>
 
-              <div className="allocation-chart">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={allocationData}
-                      dataKey="value"
-                      nameKey="name"
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={100}
-                      innerRadius={55}
-                      paddingAngle={3}
-                    >
-                      {allocationData.map((stock, index) => (
-                        <Cell
-                          key={stock.name}
-                          fill={`hsl(${index * 36},65%,50%)`}
-                        />
-                      ))}
-                    </Pie>
+              <div className="allocation-content">
+                <div className="allocation-chart">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart>
+                      <Pie
+                        data={allocationData}
+                        dataKey="value"
+                        nameKey="name"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={70}
+                        innerRadius={48}
+                        paddingAngle={2}
+                        stroke="#0b1220"
+                        strokeWidth={2}
+                      >
+                        {allocationData.map((stock, index) => (
+                          <Cell
+                            key={stock.name}
+                            fill={
+                              allocationColors[
+                                index % allocationColors.length
+                              ]
+                            }
+                          />
+                        ))}
+                      </Pie>
 
-                    <Tooltip
-                      formatter={(value) => formatCurrency(value)}
-                      contentStyle={{
-                        background: "#111827",
-                        border: "1px solid #334155",
-                        borderRadius: "8px",
-                      }}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
+                      <Tooltip
+                        formatter={(value) => formatCurrency(value)}
+                        contentStyle={{
+                          background: "#101827",
+                          border: "1px solid #26354b",
+                          borderRadius: "8px",
+                          color: "#f8fafc",
+                        }}
+                      />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
 
-              <div className="allocation-list">
-                {allocationData.map((stock) => (
-                  <div key={stock.name}>
-                    <span>{stock.name}</span>
-                    <strong>{formatCurrency(stock.value)}</strong>
-                  </div>
-                ))}
+                <div className="allocation-list">
+                  {allocationData.map((stock, index) => (
+                    <div key={stock.name}>
+                      <span>
+                        <i
+                          style={{
+                            background:
+                              allocationColors[
+                                index % allocationColors.length
+                              ],
+                          }}
+                        ></i>
+                        {stock.name}
+                      </span>
+
+                      <strong>{formatCurrency(stock.value)}</strong>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
@@ -192,6 +237,10 @@ function Portfolio() {
               <p className="dashboard-label">HOLDINGS</p>
               <h3>Your Stocks</h3>
             </div>
+
+            <span className="holding-count">
+              {holdings.length} POSITION{holdings.length !== 1 ? "S" : ""}
+            </span>
           </div>
 
           {!holdings.length ? (
@@ -209,17 +258,17 @@ function Portfolio() {
                   </div>
 
                   <div className="holding-info">
-                    <span>Avg. Buy</span>
+                    <span>AVG. BUY</span>
                     <strong>{formatCurrency(stock.averageBuyPrice)}</strong>
                   </div>
 
                   <div className="holding-info">
-                    <span>Current Price</span>
+                    <span>CURRENT</span>
                     <strong>{formatCurrency(stock.currentPrice)}</strong>
                   </div>
 
                   <div className="holding-info">
-                    <span>Current Value</span>
+                    <span>VALUE</span>
                     <strong>{formatCurrency(stock.currentValue)}</strong>
                   </div>
 

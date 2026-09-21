@@ -7,128 +7,178 @@
 .portfolio-container {
   width: min(1180px, 90%);
   margin: 0 auto;
-  padding: 44px 0 70px;
+  padding: 40px 0 65px;
 }
 
+/* Header */
 .portfolio-header {
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .portfolio-header h2 {
   margin: 0;
-  font-size: 31px;
+  font-size: 30px;
   font-weight: 600;
   letter-spacing: -0.8px;
 }
 
 .portfolio-header p:not(.dashboard-label) {
-  margin: 8px 0 0;
-  color: #718096;
-  font-size: 13px;
+  margin: 7px 0 0;
+  color: #64748b;
+  font-size: 12px;
 }
 
+/* Summary */
 .portfolio-summary {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 22px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .portfolio-card {
-  min-height: 116px;
-  padding: 20px;
+  padding: 18px 20px;
   border: 1px solid #172235;
-  border-radius: 13px;
-  background: #0d1422;
-  transition: 0.2s ease;
-}
-
-.portfolio-card:hover {
-  transform: translateY(-2px);
-  border-color: #2a3a52;
+  border-radius: 12px;
+  background: #0c1422;
 }
 
 .portfolio-card span {
   display: block;
-  color: #718096;
-  font-size: 10px;
+  color: #64748b;
+  font-size: 9px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
 }
 
 .portfolio-card strong {
   display: block;
-  margin-top: 13px;
+  margin-top: 9px;
+  color: #f1f5f9;
   font-size: 21px;
   font-weight: 600;
+  letter-spacing: -0.4px;
 }
 
 .portfolio-card small {
   display: block;
-  margin-top: 6px;
-  color: #22c55e;
-  font-size: 10px;
+  margin-top: 5px;
+  color: #475569;
+  font-size: 9px;
 }
 
-.profit-card strong,
-.profit-card small {
-  color: #22c55e;
+.portfolio-profit {
+  border-color: #183324;
+  background: #0c1715;
 }
 
+.portfolio-profit strong,
+.portfolio-profit small {
+  color: #4ade80;
+}
+
+/* Analytics */
 .analytics-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 22px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .analytics-card {
   min-width: 0;
-  padding: 22px;
+  padding: 18px;
   border: 1px solid #172235;
-  border-radius: 15px;
+  border-radius: 12px;
   background: #0b1220;
 }
 
-.analytics-heading {
-  margin-bottom: 10px;
+.analytics-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 8px;
 }
 
-.analytics-heading h3 {
+.analytics-label {
+  margin: 0 0 5px;
+  color: #22c55e;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.analytics-top h3 {
   margin: 0;
-  font-size: 18px;
+  color: #e2e8f0;
+  font-size: 16px;
   font-weight: 600;
 }
 
-.analytics-chart,
+.analytics-meta {
+  color: #475569;
+  font-size: 8px;
+  letter-spacing: 0.7px;
+}
+
+.analytics-chart {
+  width: 100%;
+  height: 190px;
+}
+
+.allocation-content {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 8px;
+  align-items: center;
+}
+
 .allocation-chart {
   width: 100%;
-  height: 285px;
+  height: 165px;
 }
 
 .allocation-list {
   display: grid;
-  gap: 7px;
+  gap: 5px;
 }
 
 .allocation-list div {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 10px;
+  padding: 8px 9px;
+  border: 1px solid #131f31;
   border-radius: 7px;
-  background: #0e1625;
-  color: #718096;
-  font-size: 10px;
+  background: #0d1625;
+}
+
+.allocation-list span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #64748b;
+  font-size: 9px;
+}
+
+.allocation-list i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
 }
 
 .allocation-list strong {
   color: #cbd5e1;
-  font-size: 11px;
+  font-size: 9px;
+  font-weight: 600;
 }
 
+/* Holdings */
 .holdings-section {
-  padding: 22px;
+  padding: 18px;
   border: 1px solid #172235;
-  border-radius: 15px;
+  border-radius: 12px;
   background: #0b1220;
 }
 
@@ -136,86 +186,94 @@
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 17px;
+  margin-bottom: 13px;
 }
 
 .section-heading h3 {
   margin: 0;
-  font-size: 19px;
+  color: #e2e8f0;
+  font-size: 17px;
   font-weight: 600;
+}
+
+.holding-count {
+  color: #475569;
+  font-size: 8px;
+  letter-spacing: 0.8px;
 }
 
 .holdings-list {
   display: grid;
-  gap: 8px;
+  gap: 5px;
 }
 
 .holding-row {
   display: grid;
-  grid-template-columns: 1.3fr repeat(4, 1fr);
-  gap: 15px;
+  grid-template-columns: 1.4fr repeat(4, 1fr);
+  gap: 12px;
   align-items: center;
-  padding: 17px;
+  padding: 13px 14px;
   border: 1px solid #172235;
-  border-radius: 10px;
-  background: #0e1625;
-  transition: 0.2s ease;
-}
-
-.holding-row:hover {
-  border-color: #2a3a52;
-  background: #101a2b;
+  border-radius: 8px;
+  background: #0d1625;
 }
 
 .holding-stock strong {
   display: block;
-  font-size: 14px;
+  color: #e2e8f0;
+  font-size: 12px;
 }
 
 .holding-stock span,
 .holding-info span {
   display: block;
-  margin-top: 5px;
-  color: #536176;
-  font-size: 9px;
+  margin-top: 4px;
+  color: #475569;
+  font-size: 8px;
 }
 
 .holding-info strong {
   display: block;
   color: #cbd5e1;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
 }
 
-.holding-profit strong,
-.holding-profit small {
-  color: #22c55e;
+.holding-profit {
+  text-align: right;
+}
+
+.holding-profit strong {
+  color: #4ade80;
 }
 
 .holding-profit small {
   display: block;
-  margin-top: 4px;
-  font-size: 9px;
+  margin-top: 3px;
+  color: #4ade80;
+  font-size: 8px;
 }
 
 .empty-portfolio {
-  padding: 45px 20px;
+  padding: 38px 20px;
   border: 1px dashed #26354b;
-  border-radius: 10px;
+  border-radius: 8px;
   text-align: center;
 }
 
 .empty-portfolio h3 {
   margin: 0;
-  font-size: 15px;
+  color: #cbd5e1;
+  font-size: 14px;
 }
 
 .empty-portfolio p {
-  margin: 7px 0 0;
+  margin: 6px 0 0;
   color: #64748b;
-  font-size: 11px;
+  font-size: 10px;
 }
 
+/* Loading */
 .portfolio-loading {
   min-height: 100vh;
   display: grid;
@@ -225,14 +283,22 @@
   font-size: 12px;
 }
 
+/* Responsive */
 @media (max-width: 950px) {
+  .allocation-content {
+    grid-template-columns: 1fr;
+  }
+
+  .allocation-chart {
+    height: 160px;
+  }
+
   .holding-row {
     grid-template-columns: 1.2fr repeat(2, 1fr);
   }
 
-  .holding-info:nth-child(4),
-  .holding-info:nth-child(5) {
-    margin-top: 8px;
+  .holding-profit {
+    text-align: left;
   }
 }
 
@@ -242,16 +308,23 @@
     padding: 30px 0 45px;
   }
 
+  .portfolio-summary,
   .analytics-grid {
     grid-template-columns: 1fr;
   }
 
-  .portfolio-summary {
-    grid-template-columns: 1fr 1fr;
+  .analytics-chart {
+    height: 180px;
   }
 
   .holding-row {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .holding-stock {
+    grid-column: 1 / -1;
+    padding-bottom: 9px;
+    border-bottom: 1px solid #172235;
   }
 }
 
@@ -261,44 +334,33 @@
   }
 
   .portfolio-header h2 {
-    font-size: 27px;
-  }
-
-  .portfolio-summary {
-    gap: 8px;
+    font-size: 26px;
   }
 
   .portfolio-card {
-    min-height: 105px;
     padding: 15px;
   }
 
   .portfolio-card strong {
-    font-size: 16px;
-    margin-top: 10px;
+    font-size: 18px;
   }
 
   .analytics-card,
   .holdings-section {
     padding: 15px;
-    border-radius: 13px;
   }
 
-  .analytics-chart,
+  .allocation-content {
+    grid-template-columns: 1fr;
+  }
+
   .allocation-chart {
-    height: 255px;
+    height: 165px;
   }
 
   .holding-row {
-    grid-template-columns: 1fr 1fr;
-    gap: 14px 10px;
-    padding: 15px;
-  }
-
-  .holding-stock {
-    grid-column: 1 / -1;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #172235;
+    gap: 12px 9px;
+    padding: 13px;
   }
 }
 
@@ -307,8 +369,11 @@
     grid-template-columns: 1fr;
   }
 
-  .analytics-chart,
+  .analytics-chart {
+    height: 165px;
+  }
+
   .allocation-chart {
-    height: 235px;
+    height: 155px;
   }
 }
